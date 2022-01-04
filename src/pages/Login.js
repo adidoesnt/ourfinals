@@ -1,7 +1,11 @@
 import { KeyboardAvoidingView, Image, Text, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
 import { styles } from '../components/Stylesheet';
+import { useState } from 'react';
 
 export default function Login() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     return (
         <KeyboardAvoidingView style={styles.container}>
             <SafeAreaView>
@@ -12,14 +16,14 @@ export default function Login() {
             <SafeAreaView style={styles.inputContainer}>
                 <TextInput 
                     placeholder='Email'
-                    //value={ }
-                    //onChangeText={ }
+                    value={email}
+                    onChangeText={text => setEmail(text)}
                     style={styles.input}
                 />
                 <TextInput 
                     placeholder='Password'
-                    //value={ }
-                    //onChangeText={ }
+                    value={password}
+                    onChangeText={text => setPassword(text)}
                     style={styles.input}
                     secureTextEntry
                 />
