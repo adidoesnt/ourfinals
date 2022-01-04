@@ -15,15 +15,20 @@ export default function Signup() {
     const [cfmPassword, setCfmPassword] = useState();
 
     function signupHandler() {
-        if(password === cfmPassword) {
-            auth
-            .createUserWithEmailAndPassword(email, password)
-            .then(credentials => {
-                const user = credentials.user;
-                console.log('Registered ' + user.email);
-            }).catch(error => alert(error.message));
+        const suffix = email.split('@')[1];
+        if(suffix === 'u.nus.edu' || suffix === 'nus.edu.sg') {
+            if(password === cfmPassword) {
+                auth
+                .createUserWithEmailAndPassword(email, password)
+                .then(credentials => {
+                    const user = credentials.user;
+                    console.log('Registered ' + user.email);
+                }).catch(error => alert(error.message));
+            } else {
+                return alert('Passwords entered do not match.');
+            }
         } else {
-            return alert('Passwords entered do not match.');
+            return alert('Signups are currently open to NUS students only.');
         }
     }
 
