@@ -60,7 +60,7 @@ model Assignment {
 
   urgency Urgency
 
-  // Use enum for timeslot?
+  // TODO: Use enum for timeslot?
   // timeslot String
 
   assigned Boolean @default(false)
