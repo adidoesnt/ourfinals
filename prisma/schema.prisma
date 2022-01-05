@@ -10,8 +10,103 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    String @id @default(uuid())
-  email String @unique
-  name  String
+model Tutor {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name     String
+  email    String  @unique
+  year     Int
+  nusnetId String?
+  gmail    String?
+  telegram String?
+
+  // A tutor can have many assignments
+  assignments Assignment[]
+
+  // A tutor teaches(?) many modules
+  modules Module[]
+}
+
+model Module {
+  code      String   @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title       String
+  searchQuery String
+
+  // Module in assignments
+  assignments Assignment[]
+
+  // Tutors who teach(?) this module
+  Tutor   Tutor?  @relation(fields: [tutorId], references: [id])
+  tutorId String?
+}
+
+model Assignment {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Each Assignment linked to one tutor
+  tutor   Tutor  @relation(fields: [tutorId], references: [id])
+  tutorId String
+
+  // Each assingment is linked to one module
+  module     Module @relation(fields: [moduleCode], references: [code])
+  moduleCode String
+
+  urgency Urgency
+
+  // TODO: Use enum for timeslot?
+  // timeslot String
+
+  assigned Boolean @default(false)
+
+  reviewCompleted String?
+  reviewFormUrl   String?
+
+
+  // This assignment's reviews
+  reviews Review[]
+
+  // Transaction linked to this assignment
+  transaction Transaction?
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  rating   Int?
+  comments String?
+
+  assignment Assignment @relation(fields: [assignmentId], references: [id])
+
+  shareTestimonal Boolean @default(false)
+  assignmentId    String
+}
+
+model Transaction {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  assignment   Assignment @relation(fields: [assignmentId], references: [id])
+  assignmentId String     @unique
+
+  // TODO: need date if we have createdAt?
+
+  // TODO: Default to zero?
+  revenue    Int
+  ourRevenue Int
+}
+
+enum Urgency {
+  oneDay
+  threeDay
+  fiveDay
 }
