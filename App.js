@@ -3,10 +3,9 @@ import Login from './src/pages/Login';
 import Signup from './src/pages/Signup';
 
 import {  Text, 
-  View, 
   Image, 
   SafeAreaView, 
-  Button, 
+  Button
 } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
@@ -27,10 +26,10 @@ function Welcome({navigation}) {
       />
       <Text>An on-demand peer tutoring platform</Text>
       <Text>by students, for students.</Text>
-      <View style={styles.join}>
+      <SafeAreaView style={styles.join}>
         <Button title='Log in' onPress={()=>{navigation.navigate('Login')}}/>
         <Button title='Sign up' onPress={()=>{navigation.navigate('Signup')}}/>
-      </View>
+      </SafeAreaView>
     </SafeAreaView>
   );
 }

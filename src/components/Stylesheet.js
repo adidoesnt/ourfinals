@@ -39,5 +39,5 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 5,
     textAlign: "center",
-  },
+  }
 });
