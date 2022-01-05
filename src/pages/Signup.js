@@ -15,8 +15,21 @@ export default function Signup() {
     const [confirmPassword, setConfirmPassword] = useState();
     const { signup } = useAuth();
 
-    function signupHandler() {
-        signup(email, password);
+    async function signupHandler() {
+        const suffix = email.split('@')[1];
+        if(suffix === 'u.nus.edu' || suffix === 'nus.edu.sg') {
+            if(password === confirmPassword) {
+                try {
+                    await signup(email, password);
+                } catch {
+                    return alert('Sign up failed.');
+                }
+            } else {
+                return alert('Passwords entered do not match.');
+            }
+        } else {
+            return alert('Signups are currently open to NUS students only.');
+        }
     }
 
     return (

@@ -12,17 +12,21 @@ export default function Login() {
         try {
             await login(email, password);
         } catch {
-            return alert('Sign in failed.')
+            return alert('Sign in failed.');
         }
     }
 
     async function resetHandler() {
-        try {
-            await reset(email);
-            return alert('Check your email for further instructions.');
-        } catch {
-            return alert('Password reset failed.');
-        } 
+        if(email !== '') {
+            try {
+                await reset(email);
+                return alert('Check your email for further instructions.');
+            } catch {
+                return alert('Password reset failed.');
+            }
+        } else {
+            return alert('Please enter an email to reset your password.')
+        }
     }
 
     return (
