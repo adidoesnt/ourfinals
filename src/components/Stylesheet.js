@@ -15,6 +15,10 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     flexDirection: "row",
   },
+  logInButton: {
+    marginRight: 10,
+    backgroundColor: "red",
+  },
   inputContainer: {
     width: "80%",
   },
@@ -39,5 +43,5 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 5,
     textAlign: "center",
-  }
+  },
 });
