@@ -7,29 +7,16 @@ import { KeyboardAvoidingView,
 } from 'react-native';
 import { styles } from '../components/Stylesheet';
 import { useState } from 'react';
-import { auth } from '../components/Firebase';
+import { useAuth } from '../components/AuthContext';
 
 export default function Signup() {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [cfmPassword, setCfmPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
+    const { signup } = useAuth();
 
     function signupHandler() {
-        const suffix = email.split('@')[1];
-        if(suffix === 'u.nus.edu' || suffix === 'nus.edu.sg') {
-            if(password === cfmPassword) {
-                auth
-                .createUserWithEmailAndPassword(email, password)
-                .then(credentials => {
-                    const user = credentials.user;
-                    console.log('Registered ' + user.email);
-                }).catch(error => alert(error.message));
-            } else {
-                return alert('Passwords entered do not match.');
-            }
-        } else {
-            return alert('Signups are currently open to NUS students only.');
-        }
+        signup(email, password);
     }
 
     return (
@@ -55,8 +42,8 @@ export default function Signup() {
                 />
                 <TextInput 
                     placeholder='Confirm Password'
-                    value={cfmPassword}
-                    onChangeText={text => setCfmPassword(text)}
+                    value={confirmPassword}
+                    onChangeText={text => setConfirmPassword(text)}
                     style={styles.input}
                     secureTextEntry
                 />
