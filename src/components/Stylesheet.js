@@ -16,8 +16,11 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
   },
   logInButton: {
-    marginRight: 10,
-    backgroundColor: "red",
+    marginTop: 5,
+    marginRight: 10
+  },
+  signUpButton: {
+    marginTop: 5
   },
   inputContainer: {
     width: "80%",
