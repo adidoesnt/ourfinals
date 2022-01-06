@@ -6,7 +6,7 @@ import { useAuth } from '../components/AuthContext';
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { login } = useAuth();
+    const { login, reset } = useAuth();
 
     async function loginHandler() {
         try {

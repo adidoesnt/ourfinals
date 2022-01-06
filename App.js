@@ -31,7 +31,7 @@ function Welcome({ navigation }) {
             }}
           />
         </View>
-        <View>
+        <View style = {styles.signUpButton}>
           <Button
             title="Sign up"
             onPress={() => {
