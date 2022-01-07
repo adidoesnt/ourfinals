@@ -15,6 +15,7 @@ import { useAuth } from "../components/AuthContext";
 import { emailSchema, passwordSchema } from "../schemas/reused";
 import { FormField } from "../components/form/FormField";
 import { useForm } from "react-hook-form";
+import { Button } from "../components/Button";
 
 const signupSchema = yup.object().shape({
   email: emailSchema,
@@ -55,57 +56,33 @@ export default function Signup() {
         />
       </SafeAreaView>
 
-      {/* New Signup form */}
-      <View>
+      <SafeAreaView style={styles.formContainer}>
         <FormField
           control={control}
           name="email"
           label="Email"
           placeholder="yourname@nus.edu.sg"
+          autoCorrect={false}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          autoComplete="email"
         ></FormField>
         <FormField
           control={control}
           name="password"
           label="Password"
+          secureTextEntry
         ></FormField>
         <FormField
           control={control}
           name="passwordConfirmation"
           label="Confirm Password"
+          secureTextEntry
         ></FormField>
 
-        <TouchableOpacity onPress={handleSubmit(signupHandler)}>
-          <Text>Sign up button</Text>
-        </TouchableOpacity>
-      </View>
-      {/*  */}
-
-      <SafeAreaView style={styles.inputContainer}>
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          style={styles.input}
-          secureTextEntry
-        />
-        <TextInput
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChangeText={(text) => setConfirmPassword(text)}
-          style={styles.input}
-          secureTextEntry
-        />
-      </SafeAreaView>
-      <SafeAreaView style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={signupHandler}>
-          <Text style={styles.button}>Sign up</Text>
-        </TouchableOpacity>
+        <View>
+          <Button onPress={handleSubmit(signupHandler)}>Sign Up</Button>
+        </View>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );

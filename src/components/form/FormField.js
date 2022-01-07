@@ -7,6 +7,7 @@ export const FormField = ({
   label,
   defaultValue = "",
   placeholder = "",
+  ...props
 }) => {
   const { field, fieldState } = useController({
     control,
@@ -17,13 +18,14 @@ export const FormField = ({
   const { error } = fieldState;
 
   return (
-    <View>
+    <View style={styles.wrapper}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
         value={field.value}
         onChangeText={field.onChange}
         style={styles.input}
         placeholder={placeholder}
+        {...props}
       ></TextInput>
       {error && <Text style={styles.error}>{error.message}</Text>}
     </View>
@@ -31,11 +33,14 @@ export const FormField = ({
 };
 
 const styles = StyleSheet.create({
+  wrapper: { marginBottom: 15 },
   label: {
     fontWeight: "bold",
     marginBottom: 5,
   },
   input: {
+    borderWidth: 3,
+    borderColor: "lightgray",
     backgroundColor: "white",
     paddingHorizontal: 15,
     paddingVertical: 10,
