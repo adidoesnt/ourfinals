@@ -32,20 +32,12 @@ export default function Signup() {
   const { signup } = useAuth();
 
   async function signupHandler(data) {
-    const { email, password, confirmPassword } = data;
+    const { email, password } = data;
 
-    console.log("Received information, trying to sign in");
-    console.log(data);
-
-    const suffix = email.split("@")[1];
-    if (suffix === "u.nus.edu" || suffix === "nus.edu.sg") {
-      try {
-        await signup(email, password);
-      } catch {
-        return alert("Sign up failed.");
-      }
-    } else {
-      return alert("Signups are currently open to NUS students only.");
+    try {
+      await signup(email, password);
+    } catch {
+      return alert("Sign up failed.");
     }
   }
 

@@ -1,9 +1,35 @@
 import * as yup from "yup";
 
+/* function isNusEmail(errorMessage) {
+  return this.test("isNusEmail", errorMessage, function (email) {
+    const { path, createError } = this;
+
+    const suffix = email.split("@")[1];
+    if (suffix === "u.nus.edu" || suffix === "nus.edu.sg") {
+      return true;
+    } else {
+      return createError({
+        path,
+        message: errorMessage ?? "The email must be a valid NUS email",
+      });
+    }
+  });
+}
+yup.addMethod(yup.email, "isNusEmail", isNusEmail); */
+
 /** @type {yup.StringSchema} */
 export const emailSchema = yup
   .string()
   .required()
+  // @ts-ignore
+  .test(
+    "is-nus-email",
+    "This must be a valid NUS email",
+    (value, context) => {
+      const suffix = value.split("@")[1];
+      return suffix === "u.nus.edu" || suffix === "nus.edu.sg";
+    }
+  )
   .email("This must be a valid email")
   .label("Email");
 
