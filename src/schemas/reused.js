@@ -20,21 +20,19 @@ yup.addMethod(yup.email, "isNusEmail", isNusEmail); */
 /** @type {yup.StringSchema} */
 export const emailSchema = yup
   .string()
-  .required()
+
   // @ts-ignore
-  .test(
-    "is-nus-email",
-    "This must be a valid NUS email",
-    (value, context) => {
-      const suffix = value.split("@")[1];
-      return suffix === "u.nus.edu" || suffix === "nus.edu.sg";
-    }
-  )
+  .test("is-nus-email", "This must be a valid NUS email", (value, context) => {
+    const suffix = value.split("@")[1];
+    return suffix === "u.nus.edu" || suffix === "nus.edu.sg";
+  })
   .email("This must be a valid email")
   .label("Email");
 
 /** @type {yup.StringSchema} */
-export const passwordSchema = yup.string().required().min(8).label("Password");
+export const passwordSchema = yup
+  .string() //.min(8)
+  .label("Password");
 
 /** @type {yup.StringSchema} */
 export const nameSchema = yup

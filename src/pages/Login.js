@@ -1,47 +1,59 @@
-import {
-  KeyboardAvoidingView,
-  Image,
-  Text,
-  SafeAreaView,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
-import { useState } from "react";
+import { View, KeyboardAvoidingView, Image, SafeAreaView } from "react-native";
 import * as yup from "yup";
 import { styles } from "../components/Stylesheet";
 import { useAuth } from "../components/AuthContext";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { emailSchema, passwordSchema } from "../schemas/reused";
+import { FormField } from "../components/form/FormField";
+import { useForm } from "react-hook-form";
+import { Button } from "../components/Button";
 
 const loginSchema = yup.object().shape({
-  email: emailSchema,
-  password: passwordSchema,
+  email: emailSchema.required(),
+  password: passwordSchema.optional(),
 });
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const { login, reset } = useAuth();
 
-  async function loginHandler() {
+  const { handleSubmit, control, setError } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    resolver: yupResolver(loginSchema),
+  });
+
+  const loginHandler = handleSubmit(async (data) => {
+    const { email, password } = data;
+
+    if (!password) {
+      console.log("There is no password!");
+      setError("password", {
+        type: "manual",
+        message: "Password is required",
+      });
+      return;
+    }
+
     try {
       await login(email, password);
     } catch {
       return alert("Sign in failed.");
     }
-  }
+  });
 
-  async function resetHandler() {
-    if (email !== "") {
-      try {
-        await reset(email);
-        return alert("Check your email for further instructions.");
-      } catch {
-        return alert("Password reset failed.");
-      }
-    } else {
-      return alert("Please enter an email to reset your password.");
+  const resetHandler = handleSubmit(async (data) => {
+    console.log("Reset handler");
+    const { email } = data;
+
+    try {
+      await reset(email);
+      return alert("Check your email for further instructions.");
+    } catch {
+      return alert("Password reset failed.");
     }
-  }
+  });
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -51,8 +63,28 @@ export default function Login() {
           source={require("../../assets/highres_transparent_logo.png")}
         />
       </SafeAreaView>
-      <SafeAreaView style={styles.inputContainer}>
-        <TextInput
+      <SafeAreaView style={styles.formContainer}>
+        <FormField
+          control={control}
+          name="email"
+          label="Email"
+          placeholder="yourname@nus.edu.sg"
+          autoCorrect={false}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          autoComplete="email"
+        ></FormField>
+        <FormField
+          control={control}
+          name="password"
+          label="Password"
+          secureTextEntry
+        ></FormField>
+        <View>
+          <Button onPress={loginHandler}>Sign Up</Button>
+          <Button onPress={resetHandler}>Forgot password?</Button>
+        </View>
+        {/* <TextInput
           placeholder="Email"
           value={email}
           onChangeText={(text) => setEmail(text)}
@@ -64,16 +96,17 @@ export default function Login() {
           onChangeText={(text) => setPassword(text)}
           style={styles.input}
           secureTextEntry
-        />
+        /> */}
       </SafeAreaView>
-      <SafeAreaView style={styles.buttonContainer}>
+
+      {/* <SafeAreaView style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={loginHandler}>
           <Text style={styles.button}>Log in</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={resetHandler}>
           <Text style={styles.button}>Forgot Password?</Text>
         </TouchableOpacity>
-      </SafeAreaView>
+      </SafeAreaView> */}
     </KeyboardAvoidingView>
   );
 }

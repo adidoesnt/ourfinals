@@ -1,13 +1,4 @@
-import {
-  KeyboardAvoidingView,
-  Text,
-  View,
-  SafeAreaView,
-  TouchableOpacity,
-  TextInput,
-  Image,
-} from "react-native";
-import { useState } from "react";
+import { KeyboardAvoidingView, View, SafeAreaView, Image } from "react-native";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { styles } from "../components/Stylesheet";
@@ -18,21 +9,28 @@ import { useForm } from "react-hook-form";
 import { Button } from "../components/Button";
 
 const signupSchema = yup.object().shape({
-  email: emailSchema,
-  password: passwordSchema,
+  email: emailSchema.required(),
+  password: passwordSchema.required(),
   passwordConfirmation: yup
     .string()
+    .required()
     .oneOf([yup.ref("password")], "The passwords do not match")
     .label("Password confirmation"),
 });
 
 export default function Signup() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
   const { signup } = useAuth();
 
-  async function signupHandler(data) {
+  const { handleSubmit, control } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+      passwordConfirmation: "",
+    },
+    resolver: yupResolver(signupSchema),
+  });
+
+  const signupHandler = handleSubmit(async (data) => {
     const { email, password } = data;
 
     try {
@@ -40,11 +38,6 @@ export default function Signup() {
     } catch {
       return alert("Sign up failed.");
     }
-  }
-
-  const { handleSubmit, control } = useForm({
-    defaultValues: {},
-    resolver: yupResolver(signupSchema),
   });
 
   return (
@@ -81,7 +74,7 @@ export default function Signup() {
         ></FormField>
 
         <View>
-          <Button onPress={handleSubmit(signupHandler)}>Sign Up</Button>
+          <Button onPress={signupHandler}>Sign Up</Button>
         </View>
       </SafeAreaView>
     </KeyboardAvoidingView>
