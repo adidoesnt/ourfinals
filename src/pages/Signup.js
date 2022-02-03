@@ -1,73 +1,82 @@
-import { KeyboardAvoidingView, 
-    Text, 
-    SafeAreaView, 
-    TouchableOpacity,
-    TextInput,
-    Image
-} from 'react-native';
-import { styles } from '../components/Stylesheet';
-import { useState } from 'react';
-import { useAuth } from '../components/AuthContext';
+import { KeyboardAvoidingView, View, SafeAreaView, Image } from "react-native";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { styles } from "../components/Stylesheet";
+import { useAuth } from "../components/AuthContext";
+import { emailSchema, passwordSchema } from "../schemas/reused";
+import { FormField } from "../components/form/FormField";
+import { useForm } from "react-hook-form";
+import { Button } from "../components/Button";
+
+const signupSchema = yup.object().shape({
+  email: emailSchema.required(),
+  password: passwordSchema.required(),
+  passwordConfirmation: yup
+    .string()
+    .required()
+    .oneOf([yup.ref("password")], "The passwords do not match")
+    .label("Password confirmation"),
+});
 
 export default function Signup() {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [confirmPassword, setConfirmPassword] = useState();
-    const { signup } = useAuth();
+  const { signup } = useAuth();
 
-    async function signupHandler() {
-        const suffix = email.split('@')[1];
-        if(suffix === 'u.nus.edu' || suffix === 'nus.edu.sg') {
-            if(password === confirmPassword) {
-                try {
-                    await signup(email, password);
-                } catch {
-                    return alert('Sign up failed.');
-                }
-            } else {
-                return alert('Passwords entered do not match.');
-            }
-        } else {
-            return alert('Signups are currently open to NUS students only.');
-        }
+  const { handleSubmit, control } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+      passwordConfirmation: "",
+    },
+    resolver: yupResolver(signupSchema),
+  });
+
+  const signupHandler = handleSubmit(async (data) => {
+    const { email, password } = data;
+
+    try {
+      await signup(email, password);
+    } catch {
+      return alert("Sign up failed.");
     }
+  });
 
-    return (
-        <KeyboardAvoidingView style={styles.container}>
-            <SafeAreaView>
-                <Image style={styles.logo}
-                    source={require('../../assets/highres_transparent_logo.png')}
-                />
-            </SafeAreaView>
-            <SafeAreaView style={styles.inputContainer}>
-                <TextInput 
-                    placeholder='Email'
-                    value={email}
-                    onChangeText={text => setEmail(text)}
-                    style={styles.input}
-                />
-                <TextInput 
-                    placeholder='Password'
-                    value={password}
-                    onChangeText={text => setPassword(text)}
-                    style={styles.input}
-                    secureTextEntry
-                />
-                <TextInput 
-                    placeholder='Confirm Password'
-                    value={confirmPassword}
-                    onChangeText={text => setConfirmPassword(text)}
-                    style={styles.input}
-                    secureTextEntry
-                />
-            </SafeAreaView>
-            <SafeAreaView style={styles.buttonContainer} >
-                <TouchableOpacity style={styles.button} onPress={signupHandler}>
-                    <Text style = {styles.button}>
-                        Sign up
-                    </Text>
-                </TouchableOpacity>
-            </SafeAreaView>
-        </KeyboardAvoidingView>
-    );
+  return (
+    <KeyboardAvoidingView style={styles.container}>
+      <SafeAreaView>
+        <Image
+          style={styles.logo}
+          source={require("../../assets/highres_transparent_logo.png")}
+        />
+      </SafeAreaView>
+
+      <SafeAreaView style={styles.formContainer}>
+        <FormField
+          control={control}
+          name="email"
+          label="Email"
+          placeholder="yourname@nus.edu.sg"
+          autoCorrect={false}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          autoComplete="email"
+        ></FormField>
+        <FormField
+          control={control}
+          name="password"
+          label="Password"
+          secureTextEntry
+        ></FormField>
+        <FormField
+          control={control}
+          name="passwordConfirmation"
+          label="Confirm Password"
+          secureTextEntry
+        ></FormField>
+
+        <View>
+          <Button onPress={signupHandler}>Sign Up</Button>
+        </View>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
+  );
 }

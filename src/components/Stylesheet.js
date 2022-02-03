@@ -17,13 +17,16 @@ export const styles = StyleSheet.create({
   },
   logInButton: {
     marginTop: 5,
-    marginRight: 10
+    marginRight: 10,
   },
   signUpButton: {
-    marginTop: 5
+    marginTop: 5,
   },
-  inputContainer: {
-    width: "80%",
+  formContainer: {
+    width: "100%",
+    paddingHorizontal: 30,
+    // display: "flex",
+
   },
   input: {
     backgroundColor: "white",
