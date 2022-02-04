@@ -1,6 +1,6 @@
-import { SafeAreaView, Text } from 'react-native';
+import { SafeAreaView, Text } from "react-native";
 
-export default function Profile() {
+export default function Settings() {
     return (
         <SafeAreaView>
             <Text>Placeholder</Text>
