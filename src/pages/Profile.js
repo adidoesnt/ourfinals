@@ -1,9 +1,5 @@
-import { SafeAreaView } from 'react';
+import { SafeAreaView } from "react";
 
 export default function Profile(props) {
-    return (
-        <SafeAreaView>
-            
-        </SafeAreaView>
-    );
+  return <SafeAreaView></SafeAreaView>;
 }
