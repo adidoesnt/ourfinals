@@ -81,7 +81,7 @@ export default function Login() {
           secureTextEntry
         ></FormField>
         <View>
-          <Button onPress={loginHandler}>Sign Up</Button>
+          <Button onPress={loginHandler}>Log In</Button>
           <Button onPress={resetHandler}>Forgot password?</Button>
         </View>
         {/* <TextInput
