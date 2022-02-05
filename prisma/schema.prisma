@@ -21,7 +21,7 @@ model User {
   year     Int
   faculty  String
   nusnetId String
-  telegram String?
+  // telegram String?
 
   tutor   Tutor?
   student Student?
@@ -35,7 +35,7 @@ model Student {
   assignments Assignment[]
 
   // A student learns many modules
-  modules Module[]
+  // modules Module[]
 }
 
 model Tutor {
@@ -46,7 +46,7 @@ model Tutor {
   assignments Assignment[]
 
   // A tutor teaches many modules
-  modules Module[]
+  // modules Module[]
 }
 
 model Module {
@@ -54,10 +54,10 @@ model Module {
   title String
 
   // Tutors who teach this module
-  tutors Tutor[]
+  // tutors Tutor[]
 
   // Students who learn the module
-  students Student[]
+  // students Student[]
 
   assignments Assignment[]
 }
