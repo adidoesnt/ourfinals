@@ -54,24 +54,24 @@ export default function Signup() {
           control={control}
           name="email"
           label="Email"
-          placeholder="yourname@nus.edu.sg"
+          placeholder="your NUS email"
           autoCorrect={false}
           autoCapitalize="none"
           keyboardType="email-address"
           autoComplete="email"
-        ></FormField>
+        />
         <FormField
           control={control}
           name="password"
           label="Password"
           secureTextEntry
-        ></FormField>
+        />
         <FormField
           control={control}
           name="passwordConfirmation"
           label="Confirm Password"
           secureTextEntry
-        ></FormField>
+        />
 
         <View>
           <Button onPress={signupHandler}>Sign Up</Button>

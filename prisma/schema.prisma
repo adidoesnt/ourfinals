@@ -21,7 +21,6 @@ model User {
   year     Int
   faculty  String
   nusnetId String
-  gmail    String
   telegram String?
 
   tutor   Tutor?
