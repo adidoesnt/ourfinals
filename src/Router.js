@@ -1,14 +1,13 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { useAuth } from "./components/AuthContext";
-import { SignedOutStack, SignedInTabs } from "./Stacks";
-import { Text } from "react-native";
+import { SignedOutStack, SignedInTabs, MissingAdditionalInfoStack } from "./Stacks";
 
 export const Router = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, additionalInfoSubmitted } = useAuth();
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? <SignedInTabs /> : <SignedOutStack />}
+      {isAuthenticated ? (additionalInfoSubmitted ? <SignedInTabs /> : <MissingAdditionalInfoStack />) : <SignedOutStack />}
     </NavigationContainer>
   );
 };

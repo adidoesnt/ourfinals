@@ -1,8 +1,10 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { facultySchema, nameSchema, nusnetIdSchema, yearSchema } from "../schemas/reused";
+import { useAuth } from "../components/AuthContext";
+import { Button } from "../components/Button";
 
-const additonalInfoSchema = yup.object.shape({
+/*const additionalInfoSchema = yup.object.shape({
     name: nameSchema.required(),
     year: yearSchema.required(),
     faculty: facultySchema.required(),
@@ -17,7 +19,7 @@ export default function AdditionalInfoSubmission() {
           faculty: "",
           nusnetid: "",
         },
-        resolver: yupResolver(signupSchema),
+        resolver: yupResolver(additionalInfoSchema),
     });
 
     const additionalInfoHandler = handleSubmit(async (data) => {
@@ -57,7 +59,17 @@ export default function AdditionalInfoSubmission() {
                     name="faculty"
                     label="Faculty"
                 />
+                <View>
+                    <Button onPress={additionalInfoHandler}>Submit</Button>
+                </View>
             </SafeAreaView>
         </KeyboardAvoidingView>
+    );
+}*/
+
+export default function AdditionalInfoSubmission() {
+    const { submitAdditionalInfo } = useAuth();
+    return (
+        <Button onPress={submitAdditionalInfo}>Submit</Button>
     );
 }
