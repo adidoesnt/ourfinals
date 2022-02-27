@@ -77,24 +77,6 @@ model Assignment {
   module     Module @relation(fields: [moduleCode], references: [code])
   moduleCode String
 
-  timeslots Timeslot[]
-
   // Will be generated when an assignment is created why Google Meet API
   meetingURL String
-
-  // These will be used to pull the files from firebase when required
-  fileURLs String[]
-}
-
-model Timeslot {
-  id String @id @default(uuid())
-
-  // Find a way to validate start < end, and slot end - start = 30 minutes
-  start DateTime
-  end   DateTime
-
-  Assignment   Assignment? @relation(fields: [assignmentId], references: [id])
-  assignmentId String?
-
-  selected Boolean @default(false)
 }
