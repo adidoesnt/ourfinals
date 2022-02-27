@@ -31,7 +31,9 @@ export function AuthProvider(props) {
 
   function submitAdditionalInfo(name, year, faculty, nusnetid) {
     console.log(`Name: ${name}\nYear: ${year}\nFaculty: ${faculty}\nNUSNET ID: ${nusnetid}`);
-    setAdditonalInfoSubmitted(true);
+    if(name && year && faculty && nusnetid) {
+      setAdditonalInfoSubmitted(true);
+    }
   }
 
   function login(email, password) {
