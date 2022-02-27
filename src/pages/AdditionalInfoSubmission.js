@@ -28,20 +28,25 @@ const additionalInfoSchema = yup.object().shape({
 });
 
 export default function AdditionalInfoSubmission() {
-  const { handleSubmit, control, clearErrors } = useForm({
+  const { handleSubmit, control, clearErrors, watch } = useForm({
+    mode: "onBlur",
+    reValidateMode: "onBlur",
     defaultValues: {
       name: "",
       year: "1",
       faculty: "",
-      nusnetid: "",
+      // nusnetid: "",
     },
     resolver: yupResolver(additionalInfoSchema),
   });
+
+  const values = watch();
 
   const additionalInfoHandler = handleSubmit(async (data) => {
     const { name, year, faculty, nusnetid } = data;
 
     try {
+      console.log({ name, year, faculty, nusnetid });
       // submit additional information
     } catch {
       return alert("Submission of additional information failed");
@@ -58,8 +63,15 @@ export default function AdditionalInfoSubmission() {
         <FormField control={control} name="faculty" label="Faculty" />
 
         <DropdownSelect
-          defaultValue={"a"}
-          items={[{ label: "a", value: "a" }]}
+          control={control}
+          name="faculty"
+          label="Faculty"
+          defaultValue="computing"
+          items={[
+            { label: "Engineering", value: "engineering" },
+            { label: "Computing", value: "computing" },
+            { label: "Science", value: "science" },
+          ]}
         ></DropdownSelect>
 
         <FormField
@@ -73,6 +85,8 @@ export default function AdditionalInfoSubmission() {
         <View>
           <Button onPress={additionalInfoHandler}>Submit</Button>
         </View>
+
+        <Text>{JSON.stringify(values, null, 2)}</Text>
       </SafeAreaView>
       {/* </KeyboardAvoidingView> */}
     </>
