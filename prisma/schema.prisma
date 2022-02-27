@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgres://adi:Ranfoil@9@localHost:5432/ourfinals_local"
 }
 
 model Faculty {
