@@ -1,8 +1,14 @@
+import { KeyboardAvoidingView, View, SafeAreaView, Image} from "react-native";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { styles } from "../components/Stylesheet";
 import { facultySchema, nameSchema, nusnetIdSchema, yearSchema } from "../schemas/reused";
+import { useAuth } from "../components/AuthContext";
+import { FormField } from "../components/form/FormField";
+import { useForm } from "react-hook-form";
+import { Button } from "../components/Button";
 
-const additonalInfoSchema = yup.object.shape({
+const additionalInfoSchema = yup.object().shape({
     name: nameSchema.required(),
     year: yearSchema.required(),
     faculty: facultySchema.required(),
@@ -10,6 +16,8 @@ const additonalInfoSchema = yup.object.shape({
 });
 
 export default function AdditionalInfoSubmission() {
+    const { submitAdditionalInfo } = useAuth();
+
     const { handleSubmit, control } = useForm({
         defaultValues: {
           name: "",
@@ -17,14 +25,14 @@ export default function AdditionalInfoSubmission() {
           faculty: "",
           nusnetid: "",
         },
-        resolver: yupResolver(signupSchema),
+        resolver: yupResolver(additionalInfoSchema),
     });
 
     const additionalInfoHandler = handleSubmit(async (data) => {
         const {name, year, faculty, nusnetid} = data;
 
         try {
-            // submit additional information
+            submitAdditionalInfo(name, year, faculty, nusnetid);
         } catch {
             return alert("Submission of additional information failed");
         }
@@ -57,6 +65,14 @@ export default function AdditionalInfoSubmission() {
                     name="faculty"
                     label="Faculty"
                 />
+                <FormField
+                    control={control}
+                    name="nusnetid"
+                    label="NUSNET ID"
+                />
+                <View>
+                    <Button onPress={additionalInfoHandler}>Submit</Button>
+                </View>
             </SafeAreaView>
         </KeyboardAvoidingView>
     );

@@ -3,8 +3,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 const userData = [
-  { email: "jon@email.com", name: "Jon Smith" },
-  { email: "tom@email.com", name: "Tom Tim" },
+  { id: '12345', name: 'John Smith', year: 3, faculty: 'computing', nusnetId: 'e1234567' }
 ];
 
 async function main() {

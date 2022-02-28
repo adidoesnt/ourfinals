@@ -50,7 +50,7 @@ export const yearSchema = yup
   .max(5)
   .label("Year");
 
-const faculties = ['computing, engineering, science'];
+const faculties = ['computing', 'engineering', 'science'];
 
 /** @type {yup.StringSchema} */
 export const facultySchema = yup

@@ -1,4 +1,3 @@
-import { Text } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Welcome from "./pages/Welcome";
@@ -7,8 +6,11 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Marketplace from "./pages/Marketplace";
 import Settings from "./pages/Settings";
+import Chat from "./pages/Chat";
+import AdditionalInfo from "./pages/AdditionalInfoSubmission";
 
 const Stack = createStackNavigator();
+const AdditionalInfoStack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
 export function SignedInTabs() {
@@ -16,8 +18,17 @@ export function SignedInTabs() {
     <Tabs.Navigator initialRouteName="Profile">
       <Tabs.Screen name="Profile" component={Profile} />
       <Tabs.Screen name="Marketplace" component={Marketplace} />
+      <Tabs.Screen name="Chat" component={Chat} />
       <Tabs.Screen name="Settings" component={Settings} />
     </Tabs.Navigator>
+  );
+}
+
+export function MissingAdditionalInfoStack() {
+  return (
+    <AdditionalInfoStack.Navigator initialRouteName="Additional Information">
+      <AdditionalInfoStack.Screen name="Additional Information" component={AdditionalInfo} />
+    </AdditionalInfoStack.Navigator>
   );
 }
 

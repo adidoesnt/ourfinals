@@ -12,6 +12,7 @@ export function AuthProvider(props) {
   This user is NOT from the database, it is the user from Firebase Auth
   */
   const [currentUser, setCurrentUser] = useState();
+  const [additionalInfoSubmitted, setAdditonalInfoSubmitted] = useState(false);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(onAuthStateChanged);
@@ -26,6 +27,13 @@ export function AuthProvider(props) {
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  function submitAdditionalInfo(name, year, faculty, nusnetid) {
+    console.log(`Name: ${name}\nYear: ${year}\nFaculty: ${faculty}\nNUSNET ID: ${nusnetid}`);
+    if(name && year && faculty && nusnetid) {
+      setAdditonalInfoSubmitted(true);
+    }
   }
 
   function login(email, password) {
@@ -44,7 +52,9 @@ export function AuthProvider(props) {
   const value = {
     currentUser,
     isAuthenticated,
+    additionalInfoSubmitted,
     signup,
+    submitAdditionalInfo,
     login,
     logout,
     reset,
