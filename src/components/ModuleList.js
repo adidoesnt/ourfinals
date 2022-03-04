@@ -10,7 +10,7 @@ export default function ModuleList(props) {
                 let code = entry[1].moduleCode;
                 let description = entry[1].description;
                 let mcs = entry[1].moduleCredit;
-                <ModuleCard id={moduleId} title={title} code={code} description={description} mcs={mcs}/>
+                <ModuleCard moduleId={moduleId} title={title} code={code} description={description} mcs={mcs}/>
                 console.log('called card generator');
             })}
         </ScrollView>
