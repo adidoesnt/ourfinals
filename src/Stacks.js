@@ -4,6 +4,7 @@ import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
+import Modules from "./pages/AllModules";
 import Marketplace from "./pages/Marketplace";
 import Settings from "./pages/Settings";
 import Chat from "./pages/Chat";
@@ -17,6 +18,7 @@ export function SignedInTabs() {
   return (
     <Tabs.Navigator initialRouteName="Profile">
       <Tabs.Screen name="Profile" component={Profile} />
+      <Tabs.Screen name="Modules" component={Modules} />
       <Tabs.Screen name="Marketplace" component={Marketplace} />
       <Tabs.Screen name="Chat" component={Chat} />
       <Tabs.Screen name="Settings" component={Settings} />
