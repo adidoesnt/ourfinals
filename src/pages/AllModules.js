@@ -1,7 +1,39 @@
-import { Text } from 'react-native';
+import { useEffect, useState } from "react";
+import { View, Text} from 'react-native';
+import { Card } from 'react-native-elements';
+import ModuleList from "../components/ModuleList";
 
 export default function AllModules() {
-    return (
-        <Text>Placeholder</Text>
+    const [modules, setModules] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+      fetch('https://api.nusmods.com/v2/2021-2022/moduleInfo.json')
+      .then(repsonse => {
+        return repsonse.json();
+      }).then(data => {
+        const temp = [];
+        for(const key in data) {
+          const module = {
+            id: key,
+            ...data[key]
+          };
+          temp.push(module)
+        }
+        setModules(temp);
+        setLoading(false);
+      });
+    }, [])
+
+    return (!loading ? (
+        <View>
+            <Text>All Modules</Text>
+            <ModuleList modules={modules}/>
+        </View>
+      ) : <View>
+        <Card>
+          <Card.Title>Loading...</Card.Title>
+        </Card>
+      </View>
     );
 }
