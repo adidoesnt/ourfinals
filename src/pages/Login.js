@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "../components/Button";
 import { useState } from "react";
 import FormDebug from "../components/form/FormDebug";
+import { firebaseErrorMessages } from "../errorMessages";
 
 const loginSchema = yup.object().shape({
   email: emailSchema.required(),
@@ -24,7 +25,7 @@ const loginSchema = yup.object().shape({
 export default function Login() {
   const { login, reset } = useAuth();
 
-  const { handleSubmit, control, setError, watch } = useForm({
+  const { handleSubmit, control, setError, setValue, watch } = useForm({
     defaultValues: {
       email: "",
       password: "",
@@ -51,7 +52,7 @@ export default function Login() {
       await login(email, password);
     } catch (error) {
       console.log(Object.keys(error));
-      setFormError(error.code);
+      setFormError(firebaseErrorMessages[error.code]);
       return alert("Sign in failed.");
     }
   });
