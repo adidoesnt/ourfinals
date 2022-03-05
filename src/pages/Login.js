@@ -14,6 +14,7 @@ import { FormField } from "../components/form/FormField";
 import { useForm } from "react-hook-form";
 import { Button } from "../components/Button";
 import { useState } from "react";
+import FormDebug from "../components/form/FormDebug";
 
 const loginSchema = yup.object().shape({
   email: emailSchema.required(),
@@ -103,7 +104,7 @@ export default function Login() {
           </View>
         )}
 
-        <Text>{JSON.stringify(values, null, 2)}</Text>
+        <FormDebug data={values} />
       </SafeAreaView>
     </KeyboardAvoidingView>
   );

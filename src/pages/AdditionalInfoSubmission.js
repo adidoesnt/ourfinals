@@ -18,6 +18,7 @@ import {
   nusnetIdSchema,
   yearSchema,
 } from "../schemas/reused";
+import FormDebug from "../components/form/FormDebug";
 
 const additionalInfoSchema = yup.object().shape({
   name: nameSchema.required(),
@@ -86,7 +87,7 @@ export default function AdditionalInfoSubmission() {
           <Button onPress={additionalInfoHandler}>Submit</Button>
         </View>
 
-        <Text>{JSON.stringify(values, null, 2)}</Text>
+        <FormDebug data={value}></FormDebug>
       </SafeAreaView>
       {/* </KeyboardAvoidingView> */}
     </>
