@@ -28,7 +28,7 @@ export const nameSchema = yup
 /** @type {yup.StringSchema} */
 export const yearSchema = yup.number().min(1).max(5).label("Year");
 
-const faculties = ["computing, engineering, science"];
+const faculties = ['computing', 'engineering', 'science'];
 
 /** @type {yup.StringSchema} */
 export const facultySchema = yup
