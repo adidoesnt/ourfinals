@@ -1,79 +1,96 @@
-import { KeyboardAvoidingView, View, SafeAreaView, Image} from "react-native";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { styles } from "../components/Stylesheet";
-import { facultySchema, nameSchema, nusnetIdSchema, yearSchema } from "../schemas/reused";
-import { useAuth } from "../components/AuthContext";
+import {
+  KeyboardAvoidingView,
+  Text,
+  View,
+  SafeAreaView,
+  Image,
+} from "react-native";
 import { FormField } from "../components/form/FormField";
-import { useForm } from "react-hook-form";
 import { Button } from "../components/Button";
+import * as yup from "yup";
+import { styles } from "../components/Stylesheet";
+import { DropdownSelect } from "../components/form/DropdownSelect";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import {
+  facultySchema,
+  nameSchema,
+  nusnetIdSchema,
+  yearSchema,
+} from "../schemas/reused";
+import FormDebug from "../components/form/FormDebug";
 
 const additionalInfoSchema = yup.object().shape({
-    name: nameSchema.required(),
-    year: yearSchema.required(),
-    faculty: facultySchema.required(),
-    nusnetid: nusnetIdSchema.required()
+  name: nameSchema.required(),
+  faculty: facultySchema.required(),
+  year: yearSchema.required(),
+  // having issues with this
+  nusnetid: yup.string().required(),
 });
 
 export default function AdditionalInfoSubmission() {
-    const { submitAdditionalInfo } = useAuth();
+  const { handleSubmit, control, clearErrors, watch } = useForm({
+    mode: "onBlur",
+    reValidateMode: "onBlur",
+    defaultValues: {
+      name: "",
+      year: "1",
+      faculty: "",
+      // nusnetid: "",
+    },
+    resolver: yupResolver(additionalInfoSchema),
+  });
 
-    const { handleSubmit, control } = useForm({
-        defaultValues: {
-          name: "",
-          year: "",
-          faculty: "",
-          nusnetid: "",
-        },
-        resolver: yupResolver(additionalInfoSchema),
-    });
+  const values = watch();
 
-    const additionalInfoHandler = handleSubmit(async (data) => {
-        const {name, year, faculty, nusnetid} = data;
+  const additionalInfoHandler = handleSubmit(async (data) => {
+    const { name, year, faculty, nusnetid } = data;
 
-        try {
-            submitAdditionalInfo(name, year, faculty, nusnetid);
-        } catch {
-            return alert("Submission of additional information failed");
-        }
-    });
+    try {
+      console.log({ name, year, faculty, nusnetid });
+      // submit additional information
+    } catch {
+      return alert("Submission of additional information failed");
+    }
+  });
 
-    return (
-        <KeyboardAvoidingView style={styles.container}>
-            <SafeAreaView>
-                <Image
-                style={styles.logo}
-                source={require("../../assets/highres_transparent_logo.png")}
-                />
-            </SafeAreaView>
+  return (
+    <>
+      {/* <KeyboardAvoidingView style={styles.container}> */}
+      <Text>Required additional information</Text>
+      <SafeAreaView style={styles.formContainer}>
+        <FormField control={control} name="name" label="name" />
 
-            <SafeAreaView style={styles.formContainer}>
-                <FormField
-                    control={control}
-                    name="name"
-                    label="Name"
-                    autoCorrect={false}
-                    autoCapitalize="words"
-                />
-                <FormField
-                    control={control}
-                    name="year"
-                    label="Year"
-                />
-                <FormField
-                    control={control}
-                    name="faculty"
-                    label="Faculty"
-                />
-                <FormField
-                    control={control}
-                    name="nusnetid"
-                    label="NUSNET ID"
-                />
-                <View>
-                    <Button onPress={additionalInfoHandler}>Submit</Button>
-                </View>
-            </SafeAreaView>
-        </KeyboardAvoidingView>
-    );
+        <FormField control={control} name="faculty" label="Faculty" />
+
+        <DropdownSelect
+          control={control}
+          name="faculty"
+          label="Faculty"
+          defaultValue="computing"
+          items={[
+            { label: "Engineering", value: "engineering" },
+            { label: "Computing", value: "computing" },
+            { label: "Science", value: "science" },
+          ]}
+        ></DropdownSelect>
+
+        <FormField
+          control={control}
+          name="year"
+          label="Year"
+          keyboardType="number-pad"
+        />
+        <FormField control={control} name="nusnetid" label="NUS NET ID" />
+
+        <View>
+          <Button onPress={additionalInfoHandler}>Submit</Button>
+        </View>
+
+        <FormDebug data={value}></FormDebug>
+      </SafeAreaView>
+      {/* </KeyboardAvoidingView> */}
+    </>
+  );
 }

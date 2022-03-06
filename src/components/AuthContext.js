@@ -37,7 +37,7 @@ export function AuthProvider(props) {
   }
 
   function login(email, password) {
-    console.log("trying to sign in");
+    console.log(email, password);
     return auth.signInWithEmailAndPassword(email, password);
   }
 

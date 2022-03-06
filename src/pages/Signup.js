@@ -7,6 +7,7 @@ import { emailSchema, passwordSchema } from "../schemas/reused";
 import { FormField } from "../components/form/FormField";
 import { useForm } from "react-hook-form";
 import { Button } from "../components/Button";
+import FormDebug from "../components/form/FormDebug";
 
 const signupSchema = yup.object().shape({
   email: emailSchema.required(),
@@ -21,7 +22,7 @@ const signupSchema = yup.object().shape({
 export default function Signup() {
   const { signup } = useAuth();
 
-  const { handleSubmit, control } = useForm({
+  const { handleSubmit, control, watch } = useForm({
     defaultValues: {
       email: "",
       password: "",
@@ -29,6 +30,7 @@ export default function Signup() {
     },
     resolver: yupResolver(signupSchema),
   });
+  const values = watch();
 
   const signupHandler = handleSubmit(async (data) => {
     const { email, password } = data;
@@ -76,6 +78,8 @@ export default function Signup() {
         <View>
           <Button onPress={signupHandler}>Sign Up</Button>
         </View>
+
+        <FormDebug data={values} />
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
