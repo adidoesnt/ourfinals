@@ -2,12 +2,14 @@ import { View, Text } from "react-native";
 import { Card } from "react-native-elements";
 import { Button } from "../Button";
 import { useAuth } from "../AuthContext";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ModuleCard(props) {
     const { changeAssignmentSubmissionStateToTrue } = useAuth();
+    const navigation = useNavigation();
 
     function viewAssignmentsHandler() {
-        console.log('loading exsiting assignments');
+        navigation.navigate('Marketplace');
         return;
     }
 

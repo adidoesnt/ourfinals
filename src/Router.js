@@ -7,8 +7,12 @@ export const Router = () => {
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? (additionalInfoSubmitted ? (submittingAssignment ? <AddAssignmentStack/> : <SignedInTabs/>) 
-        : <MissingAdditionalInfoStack />) : <SignedOutStack />}
+      {isAuthenticated ? 
+        (additionalInfoSubmitted ? 
+            (submittingAssignment ? <AddAssignmentStack/> 
+              : <SignedInTabs/>) 
+                : <MissingAdditionalInfoStack />) 
+                  : <SignedOutStack />}
     </NavigationContainer>
   );
 };
