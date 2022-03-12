@@ -1,5 +1,12 @@
 [ 
     {
+        "id": "1234", 
+        "name": "Aditya Banerjee", 
+        "year": 3, 
+        "faculty": "computing", 
+        "nusnetId": "e1000000"
+    },
+    {
         "id": "2345", 
         "name": "Ansel Cheung", 
         "year": 3, 
