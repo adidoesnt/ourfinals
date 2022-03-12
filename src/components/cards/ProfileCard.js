@@ -1,15 +1,16 @@
-import { Text } from 'react-native';
-
-const dummyData = {
-    id: '12345', 
-    name: 'John Smith', 
-    year: 3, 
-    faculty: 'computing', 
-    nusnetId: 'e1234567'
-};
+import { Text, View } from 'react-native';
+import { Card } from 'react-native-elements';
 
 export default function ProfileCard() {
     return (
-        <Text>Placeholder</Text>
+        <View>
+            <Card>
+                <Card.Title>Name</Card.Title>
+                <Card.FeaturedSubtitle>NUSNET ID</Card.FeaturedSubtitle>
+                <Card.Divider />
+                <Text>Year</Text>
+                <Text>Faculty</Text>
+            </Card>
+        </View>
     );
 }

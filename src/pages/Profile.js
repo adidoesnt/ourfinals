@@ -1,4 +1,5 @@
 import { SafeAreaView, Text } from 'react-native';
+import ProfileCard from '../components/cards/ProfileCard';
 
 const dummyData = {
     id: '23456', 
@@ -11,7 +12,7 @@ const dummyData = {
 export default function Profile() {
     return (
         <SafeAreaView>
-            <Text>Placeholder</Text>
+            <ProfileCard/>
         </SafeAreaView>
     );
 }
