@@ -12,7 +12,7 @@ export function AuthProvider(props) {
   This user is NOT from the database, it is the user from Firebase Auth
   */
   const [currentUser, setCurrentUser] = useState();
-  const [additionalInfoSubmitted, setAdditonalInfoSubmitted] = useState(false);
+  const [additionalInfoSubmitted, setAdditonalInfoSubmitted] = useState(true); //CHANGE BACK TO FALSE
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(onAuthStateChanged);
