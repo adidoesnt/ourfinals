@@ -8,7 +8,7 @@ import Modules from "./pages/AllModules";
 import Marketplace from "./pages/Marketplace";
 import Settings from "./pages/Settings";
 import Chat from "./pages/Chat";
-import AddAssignment from "./pages/AddAssigment";
+import AddAssignment from "./pages/AddAssignment";
 import AdditionalInfo from "./pages/AdditionalInfoSubmission";
 
 const Stack = createStackNavigator();

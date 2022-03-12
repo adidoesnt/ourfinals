@@ -28,6 +28,7 @@ export default function AssignmentCard(props) {
                         <Text>{assignmentData.tutorName}</Text>
                     </View> :
                     <View>
+                        <Text>-</Text>
                         <Button onPress={joinAsTutorHandler}>Teach this Assignment</Button>
                     </View>
                 }
