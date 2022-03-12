@@ -1,18 +1,20 @@
 import { SafeAreaView, Text } from 'react-native';
 import ProfileCard from '../components/cards/ProfileCard';
 
-const dummyData = {
-    id: '23456', 
-    name: 'John Appleseed', 
-    year: 2, 
-    faculty: 'engineering', 
-    nusnetId: 'e2345678'
+const userData = {
+    id: '1234', 
+    name: 'Aditya Banerjee', 
+    year: 3, 
+    faculty: 'computing', 
+    nusnetId: 'e1000000'
 };
 
 export default function Profile() {
     return (
         <SafeAreaView>
-            <ProfileCard/>
+            <ProfileCard userData={userData}/>
         </SafeAreaView>
     );
+
+    // add personal assignment list
 }

@@ -1,15 +1,16 @@
 import { Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
 
-export default function ProfileCard() {
+export default function ProfileCard(props) {
+    const userData = props.userData;
     return (
         <View>
             <Card>
-                <Card.Title>Name</Card.Title>
-                <Card.FeaturedSubtitle>NUSNET ID</Card.FeaturedSubtitle>
+                <Card.Title>Name: {userData.name}</Card.Title>
                 <Card.Divider />
-                <Text>Year</Text>
-                <Text>Faculty</Text>
+                <Text>NUSNET ID: {userData.nusnetId}</Text>
+                <Text>Year: {userData.year}</Text>
+                <Text>Faculty: {userData.faculty}</Text>
             </Card>
         </View>
     );

@@ -1,19 +1,36 @@
 import { View, Text } from 'react-native';
 import { Card } from 'react-native-elements';
-import ProfileCard from './ProfileCard';
+import { Button } from '../Button';
 
-export default function AssignmentCard() {
+export default function AssignmentCard(props) {
+    const assignmentData = props.assignmentData;
+
+    function joinAsTutorHandler() {
+        return;
+    }
+
     return (
         <View>
             <Card>
-                <Card.Title>Module Code: Module Title</Card.Title>
-                <Card.FeaturedSubtitle>Assignment Title</Card.FeaturedSubtitle>
+                <Card.Title>{assignmentData.moduleCode}: {assignmentData.moduleTitle}</Card.Title>
+                <Card.FeaturedSubtitle>{assignmentData.assignmentTitle}</Card.FeaturedSubtitle>
                 <Card.Divider />
-                <Text>Assignment Description</Text>
+                <Text>Description</Text>
+                <Text>{assignmentData.assignmentDescription}</Text>
+                <Text>{assignmentData.assignmenteescription}</Text>
                 <Text>{'\n'}Student</Text>
-                <ProfileCard/>
+                <Text>{assignmentData.studentNusId}</Text>
+                <Text>{assignmentData.studentName}</Text>
                 <Text>{'\n'}Tutor</Text>
-                <ProfileCard/>
+                {assignmentData.tutorId ? 
+                    <View>
+                        <Text>{assignmentData.tutorNusId}</Text>
+                        <Text>{assignmentData.tutorName}</Text>
+                    </View> :
+                    <View>
+                        <Button onPress={joinAsTutorHandler}>Teach this Assignment</Button>
+                    </View>
+                }
             </Card>
         </View>
     );

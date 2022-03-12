@@ -1,3 +1,37 @@
-{
-    "testUser": "testUser"
-}
+[ 
+    {
+        "id": "2345", 
+        "name": "Ansel Cheung", 
+        "year": 3, 
+        "faculty": "science", 
+        "nusnetId": "e0000001"
+    },
+    {
+        "id": "3456", 
+        "name": "Galen Cheung", 
+        "year": 3, 
+        "faculty": "computing", 
+        "nusnetId": "e0000002"
+    },
+    {
+        "id": "4567", 
+        "name": "Robin Chua", 
+        "year": 3, 
+        "faculty": "engineering", 
+        "nusnetId": "e0000003"
+    },
+    {
+        "id": "5678", 
+        "name": "Arnav Sharma", 
+        "year": 3, 
+        "faculty": "engineering", 
+        "nusnetId": "e0000004"
+    },
+    {
+        "id": "6789", 
+        "name": "Niki Lee", 
+        "year": 4, 
+        "faculty": "engineering", 
+        "nusnetId": "e0000005"
+    }
+]
