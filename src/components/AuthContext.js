@@ -13,6 +13,7 @@ export function AuthProvider(props) {
   */
   const [currentUser, setCurrentUser] = useState();
   const [additionalInfoSubmitted, setAdditonalInfoSubmitted] = useState(true); //CHANGE BACK TO FALSE
+  const [submittingAssignment, setSubmittingAssignment] = useState(false);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(onAuthStateChanged);
@@ -24,6 +25,14 @@ export function AuthProvider(props) {
   }
 
   const isAuthenticated = !!currentUser;
+
+  function changeAssignmentSubmissionStateToTrue() {
+    setSubmittingAssignment(true);
+  }
+
+  function changeAssignmentSubmissionStateToFalse() {
+    setSubmittingAssignment(false);
+  }
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -53,11 +62,14 @@ export function AuthProvider(props) {
     currentUser,
     isAuthenticated,
     additionalInfoSubmitted,
+    submittingAssignment,
     signup,
     submitAdditionalInfo,
     login,
     logout,
     reset,
+    changeAssignmentSubmissionStateToFalse,
+    changeAssignmentSubmissionStateToTrue
   };
 
   return (

@@ -8,6 +8,7 @@ import Modules from "./pages/AllModules";
 import Marketplace from "./pages/Marketplace";
 import Settings from "./pages/Settings";
 import Chat from "./pages/Chat";
+import AddAssignment from "./pages/AddAssigment";
 import AdditionalInfo from "./pages/AdditionalInfoSubmission";
 
 const Stack = createStackNavigator();
@@ -40,6 +41,14 @@ export function SignedOutStack() {
       <Stack.Screen name="Welcome" component={Welcome} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Signup" component={Signup} />
+    </Stack.Navigator>
+  );
+}
+
+export function AddAssignmentStack() {
+  return (
+    <Stack.Navigator initialRouteName="Add a New Assignment">
+      <Stack.Screen name = "Add a New Assignment" component={AddAssignment}/>
     </Stack.Navigator>
   );
 }
