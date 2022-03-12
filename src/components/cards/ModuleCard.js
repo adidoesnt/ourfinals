@@ -1,19 +1,30 @@
 import { View, Text } from "react-native";
 import { Card } from "react-native-elements";
+import { Button } from "../Button";
+import { useAuth } from "../AuthContext";
+import { useNavigation } from "@react-navigation/native";
 
-// This component fails to render - the debug statements are not printing @Parth
 export default function ModuleCard(props) {
-  console.log("loading card generator");
+    const { changeAssignmentSubmissionStateToTrue } = useAuth();
+    const navigation = useNavigation();
+
+    function viewAssignmentsHandler() {
+        navigation.navigate('Marketplace');
+        return;
+    }
+
+    function addAssignmentsHandler() {
+        changeAssignmentSubmissionStateToTrue();
+        return;
+    }
+
   return (
     <View>
-      {console.log("generating card")}
       <Card>
-        <Card.Title>{props.title}</Card.Title>
+        <Card.Title>{props.code}: {props.title}</Card.Title>
         <Card.Divider />
-        <Text>{props.moduleId}</Text>
-        <Text>{props.code}</Text>
-        <Text>{props.description}</Text>
-        <Text>{props.mcs}</Text>
+        <Button onPress={viewAssignmentsHandler}>View Existing Assignments</Button>
+        <Button onPress={addAssignmentsHandler}>Add a New Assignment</Button>
       </Card>
     </View>
   );

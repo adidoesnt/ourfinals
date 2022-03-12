@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text} from 'react-native';
+import { View, ScrollView, Text} from 'react-native';
 import { Card } from 'react-native-elements';
 import ModuleList from "../components/ModuleList";
 
@@ -25,15 +25,17 @@ export default function AllModules() {
       });
     }, [])
 
-    return (!loading ? (
-        <View>
-            <Text>All Modules</Text>
-            <ModuleList modules={modules}/>
-        </View>
-      ) : <View>
-        <Card>
-          <Card.Title>Loading...</Card.Title>
-        </Card>
+    return (
+        <View style={{flex: 1}}>{!loading ? (
+          <ScrollView>
+              <Text>All Modules</Text>
+              <ModuleList modules={modules}/>
+          </ScrollView>
+      ) : <ScrollView>
+            <Card>
+            <Card.Title>Loading...</Card.Title>
+            </Card>
+          </ScrollView>}
       </View>
     );
 }
