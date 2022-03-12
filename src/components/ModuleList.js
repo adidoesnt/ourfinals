@@ -3,7 +3,7 @@ import ModuleCard from "./cards/ModuleCard";
 
 export default function ModuleList(props) {
   {
-    const modules = props.modules.slice(0, 5);
+    const modules = props.modules.slice(0, 5); // CHANGE LATER
     return (
     <ScrollView>
       {modules &&
