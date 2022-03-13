@@ -1,12 +1,12 @@
 [
     {
         "id": "testID1",
-        "assignmentTitle": "Homework help",
-        "assignmentDescription": "I need some help with this homework"
+        "title": "Homework help",
+        "description": "I need some help with this homework"
     },
     {
         "id": "testID2",
-        "assignmentTitle": "Help needed with course",
-        "assignmentDescription": "I am unable to do this"
+        "title": "Help needed with course",
+        "description": "I am unable to do this"
     }
 ]

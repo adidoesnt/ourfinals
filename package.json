@@ -10,6 +10,7 @@
     "eject": "expo eject",
     "db:reset": "npx prisma migrate reset",
     "db:migrate": "npx prisma migrate dev",
+    "db:deploy-migrate": "npx prisma migrate deploy",
     "db:studio": "npx prisma studio"
   },
   "prisma": {

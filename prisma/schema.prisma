@@ -65,8 +65,8 @@ model Module {
 model Assignment {
   id String @id @default(uuid())
 
-  assignmentTitle       String
-  assignmentDescription String
+  title       String
+  description String
 
   // Each Assignment linked to one tutor
   tutor   Tutor  @relation(fields: [tutorId], references: [userId])
