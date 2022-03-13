@@ -65,10 +65,12 @@ model Module {
 model Assignment {
   id String @id @default(uuid())
 
+  assignmentTitle       String
+  assignmentDescription String
+
   // Each Assignment linked to one tutor
   tutor   Tutor  @relation(fields: [tutorId], references: [userId])
   tutorId String
-
 
   // Each Assignment linked to one student
   student   Student @relation(fields: [studentId], references: [userId])
@@ -78,8 +80,6 @@ model Assignment {
   module     Module @relation(fields: [moduleCode], references: [code])
   moduleCode String
 
-  assignmentTitle       String
-  assignmentDescription String
 
   // Meeting URL to be settled over chat
 }

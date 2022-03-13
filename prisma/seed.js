@@ -15,17 +15,24 @@ async function main() {
   const arnavInfo = testUsers[4];
   const nikiInfo = testUsers[5];
 
-  const aditya = prisma.user.create({
+  const aditya = await prisma.user.create({
     data: {
       ...adityaInfo,
       tutor: { create: {} },
     },
   });
-  
-  const ansel = prisma.user.create({
+
+  const ansel = await prisma.user.create({
     data: {
       ...anselInfo,
-      tutor: { create: {} },
+      student: { create: {} },
+    },
+  });
+
+  const galen = await prisma.user.create({
+    data: {
+      ...galenInfo,
+      student: { create: {} },
     },
   });
 
@@ -33,8 +40,46 @@ async function main() {
   const ac5001Info = testModules[0];
   const ac5002Info = testModules[1];
 
-  prisma.module.create({ data: ac5001Info });
-  prisma.module.create({ data: ac5002Info });
+  const ac5001 = await prisma.module.create({ data: ac5001Info });
+  const ac5002 = await prisma.module.create({ data: ac5002Info });
+
+  // Create test assignments that are linked to the modules above
+  const ass1Info = testAssignments[0];
+  const ass2Info = testAssignments[1];
+
+  const ass1 = await prisma.assignment.create({
+    data: {
+      assignmentTitle: "Test",
+      assignmentDescription: "Test",
+      tutor: {
+        connect: { userId: aditya.id },
+      },
+      student: {
+        connect: { userId: ansel.id },
+      },
+      module: {
+        connect: {
+          code: ac5001.code,
+        },
+      },
+    },
+  });
+  const ass2 = await prisma.assignment.create({
+    data: {
+      ...ass2Info,
+      tutor: {
+        connect: { userId: aditya.id },
+      },
+      student: {
+        connect: { userId: galen.id },
+      },
+      module: {
+        connect: {
+          code: ac5002.code,
+        },
+      },
+    },
+  });
 
   console.log("Seeding complete!");
 }

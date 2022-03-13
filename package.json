@@ -9,7 +9,8 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "db:reset": "npx prisma migrate reset",
-    "db:migrate": "npx prisma migrate dev"
+    "db:migrate": "npx prisma migrate dev",
+    "db:studio": "npx prisma studio"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
