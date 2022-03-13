@@ -49,8 +49,7 @@ async function main() {
 
   const ass1 = await prisma.assignment.create({
     data: {
-      assignmentTitle: "Test",
-      assignmentDescription: "Test",
+      ...ass1Info,
       tutor: {
         connect: { userId: aditya.id },
       },
