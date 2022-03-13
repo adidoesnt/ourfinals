@@ -1,7 +1,13 @@
+import PrismaCourseRepository from "./courseRepository";
 import PrismaUserRepository from "./userRepository";
 import UserService from "./userService";
 
 const prismaUserRepository = new PrismaUserRepository();
-const userService = new UserService(prismaUserRepository);
+const prismaCourseRepository = new PrismaCourseRepository();
+
+const userService = new UserService({
+  prismaUserRepository,
+  prismaCourseRepository,
+});
 
 export default userService;

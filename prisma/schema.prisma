@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model Faculty {
@@ -16,7 +16,7 @@ model Faculty {
 }
 
 model User {
-  id       String  @id
+  id       String @id
   name     String
   year     Int
   faculty  String
@@ -66,22 +66,22 @@ model Assignment {
   id String @id @default(uuid())
 
   // Each Assignment linked to one tutor
-  tutor   Tutor  @relation(fields: [tutorId], references: [userId])
-  tutorId String
-  tutorName String // change this to a relation
+  tutor      Tutor  @relation(fields: [tutorId], references: [userId])
+  tutorId    String
+  tutorName  String // change this to a relation
   tutorNusId String // change this to a relation
 
   // Each Assignment linked to one student
-  student   Student @relation(fields: [studentId], references: [userId])
-  studentId String
-  studentName String // change this to a relation
+  student      Student @relation(fields: [studentId], references: [userId])
+  studentId    String
+  studentName  String // change this to a relation
   studentNusId String // change this to a relation
 
   // Each assignment is linked to one module
   module     Module @relation(fields: [moduleCode], references: [code])
   moduleCode String
 
-  assignmentTitle String
+  assignmentTitle       String
   assignmentDescription String
 
   // Meeting URL to be settled over chat
