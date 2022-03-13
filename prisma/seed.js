@@ -1,25 +1,27 @@
 const { PrismaClient } = require("@prisma/client");
-
+const testUsers = require("../testData/testUsers.json");
+const testAssignments = require("../testData/testAssignments.json");
 const prisma = new PrismaClient();
-
-const userData = [
-  {
-    id: "12345",
-    name: "John Smith",
-    year: 3,
-    faculty: "computing",
-    nusnetId: "e1234567",
-  },
-];
 
 async function main() {
   console.log("Seeding database ...");
-  for (const userInfo of userData) {
+
+  // Create test users
+  for (const userInfo of testUsers) {
     const user = await prisma.user.create({
       data: userInfo,
     });
     console.log(`Created new user with ID ${user.id}`);
   }
+
+  // Create assignments
+  for (const assignmentInfo of testAssignments) {
+    const assignment = await prisma.assignment.create({
+      data: assignmentInfo,
+    });
+    console.log(`Create new assignment with ID ${assignment.id}`);
+  }
+
   console.log("Seeding complete!");
 }
 
