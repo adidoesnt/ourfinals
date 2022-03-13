@@ -66,16 +66,13 @@ model Assignment {
   id String @id @default(uuid())
 
   // Each Assignment linked to one tutor
-  tutor      Tutor  @relation(fields: [tutorId], references: [userId])
-  tutorId    String
-  tutorName  String // change this to a relation
-  tutorNusId String // change this to a relation
+  tutor   Tutor  @relation(fields: [tutorId], references: [userId])
+  tutorId String
+
 
   // Each Assignment linked to one student
-  student      Student @relation(fields: [studentId], references: [userId])
-  studentId    String
-  studentName  String // change this to a relation
-  studentNusId String // change this to a relation
+  student   Student @relation(fields: [studentId], references: [userId])
+  studentId String
 
   // Each assignment is linked to one module
   module     Module @relation(fields: [moduleCode], references: [code])
