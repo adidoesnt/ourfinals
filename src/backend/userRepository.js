@@ -1,6 +1,6 @@
-const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from "@prisma/client";
 
-class PrismaUserRepository {
+export default class PrismaUserRepository {
   constructor() {
     this.prisma = new PrismaClient();
   }
