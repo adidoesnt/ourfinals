@@ -1,11 +1,9 @@
 [
     {
-        "id": "testID1",
         "title": "Homework help",
         "description": "I need some help with this homework"
     },
     {
-        "id": "testID2",
         "title": "Help needed with course",
         "description": "I am unable to do this"
     }
