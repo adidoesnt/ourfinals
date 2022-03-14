@@ -1,8 +1,13 @@
-import { PrismaClient } from "@prisma/client";
+const { PrismaClient } = require("@prisma/client");
 
-export default class PrismaCourseRepository {
+module.exports = class PrismaCourseRepository {
   constructor() {
     this.prisma = new PrismaClient();
+  }
+
+  async getAssignments() {
+    // Return all assignments
+    return this.prisma.assignment.findMany();
   }
 
   async createAssignment() {
@@ -12,4 +17,4 @@ export default class PrismaCourseRepository {
   async updateAssignment() {}
 
   async deleteAssignment() {}
-}
+};

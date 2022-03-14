@@ -1,4 +1,4 @@
-export default class UserService {
+module.exports = class UserService {
   constructor({ userRepository, courseRepository }) {
     this.userRepository = userRepository;
     this.courseRepository = courseRepository;
@@ -25,4 +25,4 @@ export default class UserService {
   async addTutorAssignment() {
     // this.courseRepository
   }
-}
+};

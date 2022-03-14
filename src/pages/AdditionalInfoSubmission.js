@@ -88,7 +88,7 @@ export default function AdditionalInfoSubmission() {
           <Button onPress={additionalInfoHandler}>Submit</Button>
         </View>
 
-        <FormDebug data={value}></FormDebug>
+        <FormDebug data={values}></FormDebug>
       </SafeAreaView>
       {/* </KeyboardAvoidingView> */}
     </>
