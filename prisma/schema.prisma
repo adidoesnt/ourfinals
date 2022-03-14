@@ -32,10 +32,8 @@ model Student {
   user   User   @relation(fields: [userId], references: [id])
 
   // A student can have many assignments
+  // This is the assignment the student has created on their own
   assignments Assignment[]
-
-  // A student learns many modules
-  // modules Module[]
 }
 
 model Tutor {
@@ -43,22 +41,15 @@ model Tutor {
   userId String @id @unique
 
   // A tutor can have many assignments
+  // This is the assignments the tutor is currently helping students with
   assignments Assignment[]
-
-  // A tutor teaches many modules
-  // modules Module[]
 }
 
 model Module {
   code  String @id
   title String
 
-  // Tutors who teach this module
-  // tutors Tutor[]
-
-  // Students who learn the module
-  // students Student[]
-
+  // Assignemtns related to this module
   assignments Assignment[]
 }
 
@@ -79,7 +70,6 @@ model Assignment {
   // Each assignment is linked to one module
   module     Module @relation(fields: [moduleCode], references: [code])
   moduleCode String
-
 
   // Meeting URL to be settled over chat
 }
