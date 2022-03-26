@@ -4,17 +4,26 @@ module.exports = class UserService {
     this.courseRepository = courseRepository;
   }
 
-  async createUser({ name, year, faculty, nusnetId }) {
-    return this.userRepository.createUser({ name, year, faculty, nusnetId });
+  async createUser({ id, name, year, faculty, nusnetId }) {
+    return this.userRepository.createUser({id, name, year, faculty, nusnetId });
   }
 
-  async updateProfile({ id, name, year, faculty }) {
+  async deleteUser({ id }) {
+    return this.userRepository.deleteUser({ id });
+  }
+
+  async getUser({ id }) {
+    return this.userRepository.getUser({ id });
+  }
+
+  async updateProfile({ id, name, year, faculty, nusnetId }) {
     const userInfo = this.userRepository.getUser(id);
     this.userRepository.updateProfile({
       ...userInfo,
       name,
       year,
       faculty,
+      nusnetId
     });
   }
 
@@ -24,10 +33,5 @@ module.exports = class UserService {
 
   async addTutorAssignment() {
     // this.courseRepository
-  }
-
-  async getCurrentUserInfo() {
-    const userInfo = this.userRepository.getUser(id);
-    return userInfo;
   }
 };
