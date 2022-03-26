@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { courseService } = require("../backend");
+const { courseService } = require("../backend/courseService");
 
 function getAssignmentRoutes() {
   const router = Router();

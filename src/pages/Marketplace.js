@@ -2,7 +2,7 @@ import { View, SafeAreaView, ScrollView, Text } from "react-native";
 import { useState, useEffect } from "react";
 import { Card } from "react-native-elements";
 import AssignmentList from "../components/AssignmentList";
-import { courseService } from "../backend";
+import { courseService } from "../../server/backend/courseService";
 
 export default function Marketplace() {
   const [assignments, setAssignments] = useState([]);
@@ -21,7 +21,7 @@ export default function Marketplace() {
     // }
     // setAssignments(temp);
 
-    console.log("Getting ass");
+    console.log("Getting assignments");
     // courseService.getAssignments().then((ass) => {
     //   console.log("Fetched");
     // });

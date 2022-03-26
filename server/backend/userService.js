@@ -25,4 +25,9 @@ module.exports = class UserService {
   async addTutorAssignment() {
     // this.courseRepository
   }
+
+  async getCurrentUserInfo() {
+    const userInfo = this.userRepository.getUser(id);
+    return userInfo;
+  }
 };
