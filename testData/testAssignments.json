@@ -1,28 +1,10 @@
 [
     {
-        "id": "testID1",
-        "assignmentTitle": "testTitle1",
-        "assignmentDescription": "testDesc1",
-        "tutorId": "",
-        "studentId": "2345",
-        "moduleCode": "AC5001",
-        "moduleTitle": "Architectural History of Singapore", 
-        "studentName": "Ansel Cheung",
-        "tutorName": "",
-        "studentNusId": "e00000001",
-        "tutorNusId": ""
+        "title": "Homework help",
+        "description": "I need some help with this homework"
     },
     {
-        "id": "testID2",
-        "assignmentTitle": "testTitle2",
-        "assignmentDescription": "testDesc2",
-        "tutorId": "2345",
-        "studentId": "3456",
-        "moduleCode": "AC5002",
-        "moduleTitle": "Conservation Approaches and Philosophies", 
-        "studentName": "Ansel Cheung",
-        "tutorName": "Galen Cheung",
-        "studentNusId": "e0000002",
-        "tutorNusId": "e0000001"
+        "title": "Help needed with course",
+        "description": "I am unable to do this"
     }
 ]

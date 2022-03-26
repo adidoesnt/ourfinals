@@ -45,6 +45,8 @@ The `prisma/` folder contains:
    npx prisma migrate dev --name migrationname
    ```
 
+   (Can use `npm run db:migrate`, and it'll prompt you for a migration name)
+
    There is no need put the data in the migration name as it's already included in the resulting migration folder name.
 
    Additionally, if the local database hasn't been created, this command should create it.
