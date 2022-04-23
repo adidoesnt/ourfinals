@@ -5,13 +5,13 @@ module.exports =class PrismaUserRepository {
     this.prisma = new PrismaClient();
   }
 
-  async createUser({ name, year, faculty, nusnetId }) {
+  async createUser({ id, name, year, faculty, nusnetId }) {
     await this.prisma.user.create({
-      data: { name, year, faculty, nusnetId },
+      data: {id, name, year, faculty, nusnetId },
     });
   }
 
-  async getUser(id) {
+  async getUser({ id }) {
     return this.prisma.user.findUnique({ where: { id } });
   }
 
