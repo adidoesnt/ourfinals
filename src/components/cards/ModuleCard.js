@@ -5,7 +5,7 @@ import { useAuth } from "../AuthContext";
 import { useNavigation } from "@react-navigation/native";
 
 export default function ModuleCard(props) {
-    const { changeAssignmentSubmissionStateToTrue } = useAuth();
+    const { changeAssignmentSubmissionStateToTrue, setCurrentModule } = useAuth();
     const navigation = useNavigation();
 
     function viewAssignmentsHandler() {
@@ -14,6 +14,7 @@ export default function ModuleCard(props) {
     }
 
     function addAssignmentsHandler() {
+        setCurrentModule(props.code);
         changeAssignmentSubmissionStateToTrue();
         return;
     }
