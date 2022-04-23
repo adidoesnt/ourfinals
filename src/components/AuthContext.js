@@ -14,6 +14,8 @@ export function AuthProvider(props) {
   const [currentUser, setCurrentUser] = useState();
   const [additionalInfoSubmitted, setAdditonalInfoSubmitted] = useState(true); //CHANGE BACK TO FALSE
   const [submittingAssignment, setSubmittingAssignment] = useState(false);
+  const [currentModule, setCurrentModule] = useState();
+  const [currentAssignment, setCurrentAssignment] = useState();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(onAuthStateChanged);
@@ -63,13 +65,17 @@ export function AuthProvider(props) {
     isAuthenticated,
     additionalInfoSubmitted,
     submittingAssignment,
+    currentModule,
+    currentAssignment,
     signup,
     submitAdditionalInfo,
     login,
     logout,
     reset,
     changeAssignmentSubmissionStateToFalse,
-    changeAssignmentSubmissionStateToTrue
+    changeAssignmentSubmissionStateToTrue,
+    setCurrentModule,
+    setCurrentAssignment
   };
 
   return (

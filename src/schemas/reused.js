@@ -55,3 +55,11 @@ export const nusnetIdSchema = yup
     }
   )
   .label("NUSNET ID");
+
+export const titleSchema = yup
+  .string()
+  .label("Assignment Title");
+
+export const descriptionSchema = yup
+  .string()
+  .label("Assignment Description");
