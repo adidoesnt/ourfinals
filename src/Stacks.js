@@ -7,7 +7,6 @@ import Profile from "./pages/Profile";
 import Modules from "./pages/AllModules";
 import Marketplace from "./pages/Marketplace";
 import Settings from "./pages/Settings";
-import Chat from "./pages/Chat";
 import AddAssignment from "./pages/AddAssignment";
 import AdditionalInfo from "./pages/AdditionalInfoSubmission";
 
@@ -21,7 +20,6 @@ export function SignedInTabs() {
       <Tabs.Screen name="Profile" component={Profile} />
       <Tabs.Screen name="Modules" component={Modules} />
       <Tabs.Screen name="Marketplace" component={Marketplace} />
-      <Tabs.Screen name="Chat" component={Chat} />
       <Tabs.Screen name="Settings" component={Settings} />
     </Tabs.Navigator>
   );
