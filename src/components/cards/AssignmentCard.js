@@ -2,14 +2,24 @@ import { View, Text } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Button } from '../Button';
 import { useAuth } from '../AuthContext'
+import { useState } from 'react'
 
 export default function AssignmentCard(props) {
     const assignmentData = props.assignmentData;
     const { currentUser } = useAuth();
+    // const [tutor, setTutor] = useState({})
 
     function joinAsTutorHandler() {
         // check to see if student uid = currentUser
         // might need a services function to return student based on NUSNETID
+        // something like
+        // if(getStudentByNUSId(assignmentData.studentNusId).uid == currentUser) {
+        //     console.error('Student and tutor cannot be the same person');
+        // } else {
+        //     setTutor({tutorObject});
+        //     set assignmentData.tutorId = tutor.tutorId
+        //     ... so and so forth
+        // }
         return;
     }
 
