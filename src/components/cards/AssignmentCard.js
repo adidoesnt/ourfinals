@@ -1,11 +1,15 @@
 import { View, Text } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Button } from '../Button';
+import { useAuth } from '../AuthContext'
 
 export default function AssignmentCard(props) {
     const assignmentData = props.assignmentData;
+    const { currentUser } = useAuth();
 
     function joinAsTutorHandler() {
+        // check to see if student uid = currentUser
+        // might need a services function to return student based on NUSNETID
         return;
     }
 
